@@ -4745,7 +4745,8 @@ insert into LIVRE(isbn, titre,nbpages,datepubli,prix) values
 	('9782226143846', '100 mots à sauver', 128, 2004, 9.0),
 	('9782226079244', 'Histoire indiscrète des années Balladur', 288, 1995, 9.0),
 	('9782226070180', 'Paris 1944', 573, 1994, 5.29),
-	('9782020977739', 'Lettres à maman', 61, 2008, 25.0);
+	('9782020977739', 'Lettres à maman', 61, 2008, 25.0)
+	('9782844273765' , 'SQL pour les Nuls' , 292 , 2002 , 33.5);
 
 -- Les thèmes des livres
 insert into THEMES(isbn,iddewey) values
