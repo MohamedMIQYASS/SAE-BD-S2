@@ -2689,7 +2689,8 @@ insert into AUTEUR(idauteur, nomauteur,anneenais,anneedeces) values
 	('OL6514279A', 'Pierre Clastres', NULL, NULL),
 	('OL22315A', 'Kim Ostrow', NULL, NULL),
 	('OL4283104A', 'Pierre Huard', 1901, NULL),
-	('OL246259A' , 'Allen G. Taylor' , NULL , NULL );
+	('OL246259A' , 'Allen G. Taylor' , NULL , NULL ),
+	('OL7670824A' , 'Reinhard Engel' , NULL , NULL);
 	
 
 -- Les livres
