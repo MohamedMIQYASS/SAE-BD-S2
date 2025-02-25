@@ -11074,7 +11074,8 @@ insert into ECRIRE(isbn,idauteur) values
 	('9782226079244', 'OL56708A'),
 	('9782226070180', 'OL3967064A'),
 	('9782020977739', 'OL441591A')
-	('9782844273765','OL246259A');
+	('9782844273765','OL246259A')
+	('9782844273765' , 'OL7670824A');
 
 -- les stocks de livres
 insert into POSSEDER(idmag, isbn, qte) values
