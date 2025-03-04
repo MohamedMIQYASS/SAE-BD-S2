@@ -172,7 +172,8 @@ group by nomclass;
 
 
 
-
+select (qte*)
+where YEAR(datecom) = '2024';
 group by MONTH(datecom);
 
 
