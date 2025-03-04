@@ -170,11 +170,10 @@ group by nomclass;
 -- | etc...
 -- = Reponse question 127381.
 
+select MONTH(datecom) as mois, nommag as Magasin , IFNULL(sum(prixvente*qte),0) as CA
+from MAGASIN natural join COMMANDE natural join DETAILCOMMANDE
+order by mois desc;
 
-
-select (qte*)
-where YEAR(datecom) = '2024';
-group by MONTH(datecom);
 
 
 -- +-----------------------+--
