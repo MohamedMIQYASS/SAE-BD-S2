@@ -151,7 +151,7 @@ group by nommag, YEAR(datecom);
 -- | etc...
 -- = Reponse question 127370.
 select nomclass as Theme, IFNULL(sum(prixvente*qte),0) as Montant 
-from CLASSIFICATION natural join LIVRE natural join DETAILCOMMANDE
+from CLASSIFICATION natural join THEMES natural join LIVRE natural join DETAILCOMMANDE
 group by nomclass;
 
 
@@ -169,11 +169,9 @@ group by nomclass;
 -- +------+-------------------------+---------+
 -- | etc...
 -- = Reponse question 127381.
-
-select MONTH(datecom) as mois, nommag as Magasin , IFNULL(sum(prixvente*qte),0) as CA
-from MAGASIN natural join COMMANDE natural join DETAILCOMMANDE
-order by mois desc;
-
+select Month(datecom) mois, nommag Magasin, IFNULL(sum(prixvente*qte),0) CA from 
+MAGASIN natural join COMMANDE natural join DETAILCOMMANDE 
+group by mois,nommag;
 
 
 -- +-----------------------+--
@@ -189,7 +187,9 @@ order by mois desc;
 -- +-------+------------+---------+
 -- | etc...
 -- = Reponse question 127437.
-
+select YEAR(datecom) annee, enligne as typevente, IFNULL(sum(prixvente*qte),0) montant
+from COMMANDE natural join DETAILCOMMANDE
+group by YEAR(datecom), enligne;
 
 
 -- +-----------------------+--
@@ -205,7 +205,9 @@ order by mois desc;
 -- +-------------------+-----------+
 -- | etc...
 -- = Reponse question 127471.
-
+select nomedit as Editeur, count(idauteur) nbauteurs from 
+EDITEUR natural join EDITER natural join LIVRE natural join ECRIRE natural join AUTEUR
+group by Editeur order by nbauteurs desc limit 10;
 
 
 -- +-----------------------+--
@@ -221,7 +223,7 @@ order by mois desc;
 -- +-------------+-----+
 -- | etc...
 -- = Reponse question 127516.
-
+select 
 
 
 -- +-----------------------+--
