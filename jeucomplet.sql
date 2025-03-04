@@ -13053,7 +13053,8 @@ insert into POSSEDER(idmag, isbn, qte) values
 	(4, '9782226151155', 4),
 	(1, '9782226085962', 10),
 	(1, '9782081271654', 9),
-	(7, '9782070570669', 6);
+	(7, '9782070570669', 6),
+	(7,'978284427376' , 3);
 
 insert into COMMANDE(numcom, datecom, enligne, livraison, idcli, idmag) values
 	(1,str_to_date('1/1/2020','%d/%m/%Y'),'N','M',356,5),
