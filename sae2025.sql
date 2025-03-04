@@ -225,7 +225,7 @@ group by Editeur order by nbauteurs desc limit 10;
 -- +-------------+-----+
 -- | etc...
 -- = Reponse question 127516.
-select 
+ 
 
 
 -- +-----------------------+--
@@ -233,7 +233,7 @@ select
 -- +-----------------------+--
 -- Ecrire une requête qui renvoie les informations suivantes:
 --  Requête Graphique 7 Valeur du stock par magasin
- Requête Graphique 8 Statistiques sur l'évolution du chiffre d'affaire total par client 
+--  Requête Graphique 8 Statistiques sur l'évolution du chiffre d'affaire total par client 
 
 -- Voici le début de ce que vous devez obtenir.
 -- ATTENTION à l'ordre des colonnes et leur nom!
@@ -242,6 +242,10 @@ select
 -- +-------------------------+---------+
 -- | etc...
 -- = Reponse question 127527.
+
+select nommag as Magasin , IFNULL(sum(qte*prix),0) as total 
+from MAGASIN natural join POSSEDER natural join LIVRE
+group by Magasin;
 
 
 
