@@ -1,5 +1,5 @@
 -- Devoir 127
--- Nom: CHER , Prenom: Naick
+-- Nom: KURAC , Prenom: ADNAN-ERDEM
 
 -- Feuille SAE2.05 Exploitation d'une base de données: Livre Express
 -- 
@@ -19,7 +19,9 @@
 -- +---------------+--------------------------------------------+---------+-----------+-------+
 -- | etc...
 -- = Reponse question 127156.
-
+select isbn, titre, nbpages, datepubli, prix 
+from LIVRE natural join DETAILCOMMANDE 
+where numcom in (select numcom from COMMANDE where datecom = '2024-12-01');
 
 
 -- +-----------------------+--
@@ -35,7 +37,10 @@
 -- +-------+---------+-----------+-----------------------------+------------+-------------+
 -- | etc...
 -- = Reponse question 127202.
-
+select idcli, nomcli, prenomcli, adressecli, codepostal, villecli 
+from CLIENT 
+natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join AUTEUR 
+where nomauteur = 'René Goscinny' and YEAR(datecom) = 2021;
 
 
 -- +-----------------------+--
@@ -51,7 +56,9 @@
 -- +---------------+-----------------------------------+-------------------------+-----+
 -- | etc...
 -- = Reponse question 127235.
-
+select isbn,titre,nommag,qte
+from LIVRE natural left join ECRIRE natural join POSSEDER natural join MAGASIN
+where idmag is null and qte > 8;
 
 
 -- +-----------------------+--
@@ -67,9 +74,16 @@
 -- +-------+-------------------------+-------+
 -- | etc...
 -- = Reponse question 127279.
+select idmag, nommag, count(idcli) as nbcli
+from MAGASIN natural join COMMANDE natural join CLIENT 
+where villecli = villemag
+group by idmag;
 
-
-
+select M.idmag, M.nommag, count(C.idcli) as nbcli
+from MAGASIN M
+left join COMMANDE CO on M.idmag = CO.idmag
+left join CLIENT C on CO.idcli = C.idcli and C.villecli = M.villemag
+group by M.idmag, M.nommag;
 -- +-----------------------+--
 -- * Question 127291 : 2pts --
 -- +-----------------------+--
@@ -83,6 +97,9 @@
 -- +-------------------------+------+
 -- | etc...
 -- = Reponse question 127291.
+with aaa as(select * from COMMANDE natural join DETAILCOMMANDE where datecom = '2022-09-15')
+select nommag, IFNULL(sum(qte),0) as nbex from MAGASIN natural left join aaa group by nommag;
+
 
 
 
@@ -99,7 +116,7 @@
 -- +------------+
 -- | etc...
 -- = Reponse question 127314.
-
+select 
 
 
 -- +-----------------------+--
@@ -115,7 +132,9 @@
 -- +-------------------------+-------+-----+
 -- | etc...
 -- = Reponse question 127369.
-
+select nommag Magasin, YEAR(datecom) as Année, sum(qte) as qte
+from MAGASIN natural join COMMANDE natural join DETAILCOMMANDE
+group by nommag, YEAR(datecom);
 
 
 -- +-----------------------+--
@@ -131,6 +150,9 @@
 -- +--------------------------------------+---------+
 -- | etc...
 -- = Reponse question 127370.
+select nomclass as Theme, IFNULL(sum(prixvente*qte),0) as Montant 
+from CLASSIFICATION natural join LIVRE natural join DETAILCOMMANDE
+group by nomclass;
 
 
 
