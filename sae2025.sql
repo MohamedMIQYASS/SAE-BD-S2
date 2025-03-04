@@ -1,5 +1,7 @@
 -- Devoir 127
 -- Nom: KURAC , Prenom: ADNAN-ERDEM
+-- Nom: MIQYASS , Prenom: MOHAMED
+
 
 -- Feuille SAE2.05 Exploitation d'une base de données: Livre Express
 -- 
