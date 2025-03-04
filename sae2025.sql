@@ -1,5 +1,7 @@
 -- Devoir 127
 -- Nom: KURAC , Prenom: ADNAN-ERDEM
+-- Nom: MIQYASS , Prenom: MOHAMED
+
 
 -- Feuille SAE2.05 Exploitation d'une base de données: Livre Express
 -- 
@@ -223,14 +225,10 @@ group by Editeur order by nbauteurs desc limit 10;
 -- +-------------+-----+
 -- | etc...
 -- = Reponse question 127516.
-select villecli ville, sum(qte) from CLIENT 
-natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join AUTEUR
-where nomauteur = 'René Goscinny'
-group by villecli;
 
-with bbb as(select * from AUTEUR where nomauteur = 'René Goscinny')
-select villecli ville, sum(qte) from CLIENT natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join
-bbb group by villecli;
+
+
+ 
 
 
 -- +-----------------------+--
@@ -238,7 +236,7 @@ bbb group by villecli;
 -- +-----------------------+--
 -- Ecrire une requête qui renvoie les informations suivantes:
 --  Requête Graphique 7 Valeur du stock par magasin
- 
+--  Requête Graphique 8 Statistiques sur l'évolution du chiffre d'affaire total par client 
 
 -- Voici le début de ce que vous devez obtenir.
 -- ATTENTION à l'ordre des colonnes et leur nom!
@@ -247,14 +245,18 @@ bbb group by villecli;
 -- +-------------------------+---------+
 -- | etc...
 -- = Reponse question 127527.
-select
+
+select nommag as Magasin , IFNULL(sum(qte*prix),0) as total 
+from MAGASIN natural join POSSEDER natural join LIVRE
+group by Magasin;
+
 
 
 -- +-----------------------+--
 -- * Question 127538 : 2pts --
 -- +-----------------------+--
 -- Ecrire une requête qui renvoie les informations suivantes:
--- Requête Graphique 8 Statistiques sur l'évolution du chiffre d'affaire total par client 
+--  Requête Palmarès
 
 -- Voici le début de ce que vous devez obtenir.
 -- ATTENTION à l'ordre des colonnes et leur nom!
@@ -263,6 +265,10 @@ select
 -- +-------+---------+---------+---------+
 -- | etc...
 -- = Reponse question 127538.
+
+
+
+
 
 
 
@@ -279,6 +285,8 @@ select
 -- +-------+-----------------------+-------+
 -- | etc...
 -- = Reponse question 127572.
+
+select YEAR(date)
 
 
 
