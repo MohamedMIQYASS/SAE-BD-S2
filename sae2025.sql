@@ -172,6 +172,10 @@ group by nomclass;
 
 
 
+
+group by MONTH(datecom);
+
+
 -- +-----------------------+--
 -- * Question 127437 : 2pts --
 -- +-----------------------+--
