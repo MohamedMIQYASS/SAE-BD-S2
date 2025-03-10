@@ -118,7 +118,45 @@ select nommag, IFNULL(sum(qte),0) as nbex from MAGASIN natural left join aaa gro
 -- +------------+
 -- | etc...
 -- = Reponse question 127314.
-select 
+
+
+
+-- insertions dans la tables EDITEUR :
+
+insert into EDITEUR(nomedit , idedit) values ('First Interactive' , 240);
+
+-- insertions dans la table AUTEUR  :
+
+insert into AUTEUR(idauteur , nomauteur , anneenais , anneedeces) values 
+('OL246259A' , 'Allen G. Taylor' , NULL , NULL ), 	
+('OL7670824A' , 'Reinhard Engel' , NULL , NULL);
+
+-- insertions dans la table LIVRE : 
+
+insert into LIVRE(isbn , titre , nbpages , datepubli , prix) values 
+('9782844273765' , 'SQL pour les Nuls' , 292 , 2002 , 33.5);
+
+
+-- insertions dans la table EDITER :
+
+insert into EDITER(isbn , idauteur) values ('9782844273765',240);
+
+
+-- insertions dans la table ECRIRE :
+
+insert into ECRIRE(isbn,idauteur) values 	('9782844273765','OL246259A'),
+('9782844273765' , 'OL7670824A');
+
+
+-- insertions dans la table POSSEDER :
+
+insert into POSSEDER(idmag,isbn,qte) values (7, '9782844273765' ,3);
+
+
+
+
+
+
 
 
 -- +-----------------------+--
