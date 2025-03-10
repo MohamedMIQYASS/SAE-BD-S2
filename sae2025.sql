@@ -256,7 +256,10 @@ group by Magasin;
 -- * Question 127538 : 2pts --
 -- +-----------------------+--
 -- Ecrire une requête qui renvoie les informations suivantes:
---  Requête Palmarès
+
+
+--  Requête Graphique 8 Statistiques sur l'évolution du chiffre d'affaire total par client 
+
 
 -- Voici le début de ce que vous devez obtenir.
 -- ATTENTION à l'ordre des colonnes et leur nom!
@@ -277,6 +280,9 @@ group by Magasin;
 -- +-----------------------+--
 -- Ecrire une requête qui renvoie les informations suivantes:
 --  Requête imprimer les commandes en considérant que l'on veut celles de février 2020
+
+--  Requête Palmarès
+
 
 -- Voici le début de ce que vous devez obtenir.
 -- ATTENTION à l'ordre des colonnes et leur nom!
