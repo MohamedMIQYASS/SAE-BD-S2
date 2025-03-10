@@ -236,7 +236,6 @@ group by Editeur order by nbauteurs desc limit 10;
 -- +-----------------------+--
 -- Ecrire une requête qui renvoie les informations suivantes:
 --  Requête Graphique 7 Valeur du stock par magasin
---  Requête Graphique 8 Statistiques sur l'évolution du chiffre d'affaire total par client 
 
 -- Voici le début de ce que vous devez obtenir.
 -- ATTENTION à l'ordre des colonnes et leur nom!
@@ -268,6 +267,9 @@ group by Magasin;
 -- +-------+---------+---------+---------+
 -- | etc...
 -- = Reponse question 127538.
+
+
+
 
 
 
