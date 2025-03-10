@@ -332,7 +332,14 @@ group by Magasin;
 -- | etc...
 -- = Reponse question 127572.
 
-select YEAR(date)
+select  nomauteur ,  sum(qte) as nbr , YEAR(datecom) as annee
+from AUTEUR natural join LIVRE natural join DETAILCOMMANDE natural join COMMANDE
+group by annee ;
+
+
+
+
+
 
 
 
