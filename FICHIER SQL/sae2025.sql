@@ -81,11 +81,7 @@ from MAGASIN natural join COMMANDE natural join CLIENT
 where villecli = villemag
 group by idmag;
 
-select M.idmag, M.nommag, count(C.idcli) as nbcli
-from MAGASIN M
-left join COMMANDE CO on M.idmag = CO.idmag
-left join CLIENT C on CO.idcli = C.idcli and C.villecli = M.villemag
-group by M.idmag, M.nommag;
+
 -- +-----------------------+--
 -- * Question 127291 : 2pts --
 -- +-----------------------+--
