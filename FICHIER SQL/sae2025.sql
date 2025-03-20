@@ -100,7 +100,6 @@ select nommag, IFNULL(sum(qte),0) as nbex from MAGASIN natural left join aaa gro
 
 
 
-
 -- +-----------------------+--
 -- * Question 127314 : 2pts --
 -- +-----------------------+--
@@ -114,8 +113,6 @@ select nommag, IFNULL(sum(qte),0) as nbex from MAGASIN natural left join aaa gro
 -- +------------+
 -- | etc...
 -- = Reponse question 127314.
-
-
 
 -- insertions dans la tables EDITEUR :
 
@@ -147,12 +144,6 @@ insert into ECRIRE(isbn,idauteur) values 	('9782844273765','OL246259A'),
 -- insertions dans la table POSSEDER :
 
 insert into POSSEDER(idmag,isbn,qte) values (7, '9782844273765' ,3);
-
-
-
-
-
-
 
 
 -- +-----------------------+--
