@@ -269,13 +269,6 @@ natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural joi
 where nomauteur = 'René Goscinny'
 group by villecli;
 
-with bbb as(select * from AUTEUR where nomauteur = 'René Goscinny')
-select villecli ville, sum(qte) as qte from CLIENT natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join
-bbb group by villecli;
-
-
-
- 
 
 
 -- +-----------------------+--
