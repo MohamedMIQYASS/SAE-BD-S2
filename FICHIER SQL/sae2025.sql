@@ -264,13 +264,13 @@ group by Editeur order by nbauteurs desc limit 10;
 -- | etc...
 -- = Reponse question 127516.
 
-select villecli ville, sum(qte) from CLIENT 
+select villecli ville, sum(qte) as qte from CLIENT 
 natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join AUTEUR
 where nomauteur = 'René Goscinny'
 group by villecli;
 
 with bbb as(select * from AUTEUR where nomauteur = 'René Goscinny')
-select villecli ville, sum(qte) from CLIENT natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join
+select villecli ville, sum(qte) as qte from CLIENT natural join COMMANDE natural join DETAILCOMMANDE natural join LIVRE natural join ECRIRE natural join
 bbb group by villecli;
 
 
