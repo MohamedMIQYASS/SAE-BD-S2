@@ -294,7 +294,8 @@ group by Magasin;
 -- +-------+---------+---------+---------+
 -- | etc...
 -- = Reponse question 127538.
-
+with Client as (select YEAR(datecom) annee, idcli, sum(prixvente*qte)as CA from COMMANDE natural join DETAILCOMMANDE group by YEAR(datecom), idcli) -- ici on calcule pour chaque annee et client, LE CA
+select annee, max(CA) as maximum, min(CA) as minimum, ROUND(avg(CA),2) as moyenne from Client group by annee;
 
 
 
@@ -318,9 +319,14 @@ group by Magasin;
 -- | etc...
 -- = Reponse question 127572.
 
-select  nomauteur ,  sum(qte) as nbr , YEAR(datecom) as annee
-from AUTEUR natural join LIVRE natural join DETAILCOMMANDE natural join COMMANDE
-group by annee ;
+with LivreVendu as (select YEAR(datecom) as annee, idauteur, sum(qte) total from ECRIRE
+ natural join LIVRE 
+ natural join DETAILCOMMANDE 
+ natural join COMMANDE where YEAR(datecom) != 2025
+ group by annee,idauteur
+ order by total desc)
+
+select annee, nomauteur, max(total) from LivreVendu natural left join AUTEUR group by annee;
 
 
 
