@@ -43,7 +43,7 @@ plt.scatter(CA, NbVentes, color="red", marker="o", alpha=0.7)
 def regression_lineaire(CA , NbVentes):
     a = sum(xd * yd for xd , yd  in zip(CA_diff, NbVentes_diff)) / denom_CA
     b = mean_Nbventes - a * mean_CA
-    plt.plot([0,25000],[b,a*25000+b])
+    plt.plot([0,max(NbVentes)],[b,a*max(NbVentes)+b])
     plt.show()
  
 regression_lineaire(CA,NbVentes)
