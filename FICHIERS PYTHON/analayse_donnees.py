@@ -36,7 +36,7 @@ print("Coefficient de correlation de Pearson :", correlation)
 
 # Representation graphique :
 
-plt.scatter(CA, NbVentes, color="yellow", marker="o", alpha=0.7)
+plt.scatter(CA, NbVentes, color="red", marker="o", alpha=0.7)
 
 # Fonction python qui permet de représenter la droite de regression linéaire :
 
