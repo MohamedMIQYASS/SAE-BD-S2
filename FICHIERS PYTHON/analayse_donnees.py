@@ -6,96 +6,35 @@ import matplotlib.pyplot as plt
 
 
 # Création des listes représentant les chiffres d'affaire et les nombres de ventes :
+CA = np.array([7808, 6678, 5993, 4803, 6075, 8735, 11105, 11630, 22724, 16931, 20721, 22475])
+NbVentes = np.array([378, 260, 262, 240, 262, 334, 489, 524, 1072, 768, 907, 1039])
 
-CA  = np.array([7808 , 6678 , 5993 , 4803 , 6075 ,8735 ,  11105 ,  11630 ,22724 ,  16931 , 20721 , 22475 ])
-NbVentes = np.array([378 ,260 ,  262 ,240 ,  262 , 334 , 489 ,524 , 1072 ,768 , 907 , 1039 ])
+# Calcul des moyennes
+mean_CA = np.mean(CA)
+mean_Nbventes = np.mean(NbVentes)
 
-# Calcul de la moyenne de ces 2 listes :
+# Calcul des écarts à la moyenne
+CA_diff = CA - mean_CA
+NbVentes_diff = NbVentes - mean_Nbventes
 
-mean_CA = sum(CA)/ len(CA)
-mean_Nbventes = sum(NbVentes)/ len(NbVentes)
+# Calcul de la somme des produits des écarts quadratiques
+num = np.sum(NbVentes_diff * CA_diff)
 
-# Calcul de la différences ce ces 2 listes et leur moyenne ; 
+# Calcul du dénominateur
+denom_Nbventes = np.sum(NbVentes_diff ** 2)
 
-CA_diff = [ca - mean_CA for ca in CA]
-NbVentes_diff = [nb - mean_Nbventes for nb in NbVentes]
+# Calcul du coefficient de correlation de Pearson
+correlation = num / (np.sqrt(np.sum(CA_diff**2)) * np.sqrt(denom_Nbventes))
+print("Coefficient de corrélation de Pearson :", correlation)
 
-# Calcul de la somme des produits des écarts quadratiques : 
+# Représentation graphique
+plt.scatter(NbVentes, CA, color="red", marker="o", alpha=0.7)
 
-num = sum(xd * yd for xd, yd in zip(CA_diff, NbVentes_diff))
+# Fonction de régression linéaire
+def regression_lineaire(NbVentes, CA):
+ a = num / denom_Nbventes 
+ b = mean_CA - a * mean_Nbventes 
+ plt.plot([0, max(NbVentes)], [b, a * max(NbVentes) + b], color="blue")
+ plt.show()
 
-# Calcul du dénominateur des 2 listes : 
-
-denom_CA = sum(xd ** 2 for xd in CA_diff)
-denom_Nbventes = sum(yd ** 2 for yd in NbVentes_diff)
-
-# Calcul du coefficient de correlation : 
-
-correlation = num / (np.sqrt(denom_CA) * np.sqrt(denom_Nbventes))
-print("Coefficient de correlation de Pearson :", correlation)
-
-# Representation graphique :
-
-plt.scatter(CA, NbVentes, color="red", marker="o", alpha=0.7)
-
-# Fonction python qui permet de représenter la droite de regression linéaire :
-
-def regression_lineaire(CA , NbVentes):
-    a = sum(xd * yd for xd , yd  in zip(CA_diff, NbVentes_diff)) / denom_CA
-    b = mean_Nbventes - a * mean_CA
-    plt.plot([0,25000],[b,a*25000+b])
-    plt.show()
- 
-regression_lineaire(CA,NbVentes)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+regression_lineaire(NbVentes, CA)
