@@ -67,7 +67,7 @@ def faire_factures(requete: str, mois: int, annee: int, bd: MySQL):
             total_commande = 0
             facture_count += 1
         
-        res += f"{ligne['isbn']:<20} {ligne['titre'][:35]:<35} {ligne['qte']:<5} {ligne['prixvente']:<8.2f} {ligne['total']:<8.2f}\n"
+        res += f"{ligne['isbn']:<20} {ligne['titre'][:35]:<35}    {ligne['qte']:<5} {ligne['prixvente']:<8.2f} {ligne['total']:<8.2f}\n"
         total_commande += ligne['total']
         total_livres += ligne['qte']
         livre_count += ligne['qte']
