@@ -26,65 +26,65 @@ class MySQL(object):
                 requete=requete.replace('?',str(param),1)
         return self.cnx.execute(requete)
 
-def faire_factures(requete: str, mois: int, annee: int, bd: MySQL):
-    curseur = bd.execute(requete, (mois, annee))
+def faire_factures(requete: str, mois: int, annee: int, base_donnees: MySQL):
+    curseur = base_donnees.execute(requete, (mois, annee))
     
-    res = f"Factures du {mois}/{annee}\n"
-    current_magasin = None
-    current_commande = None
+    resultat = f"Factures du {mois}/{annee}\n"
+    magasin_actuel = None
+    commande_actuelle = None
     total_livres = 0
     total_factures = 0
-    chiffre_affaire_global = 0
-    facture_count = 0
-    livre_count = 0
+    chiffre_affaire_total = 0
+    nombre_factures = 0
+    nombre_livres = 0
     
     for ligne in curseur:
         magasin = ligne['nommag']
-        if magasin != current_magasin:
-            if current_magasin is not None:
-                res += f"--------\nTotal {total_commande:.2f}\n"
-                res += "--------------------------------------------------------------------------------\n"
-                res += f"{facture_count} factures éditées\n"
-                res += f"{livre_count} livres vendus\n"
-                res += "********************************************************************************\n"
-            res += f"Edition des factures du magasin {magasin}\n"
-            res += "--------------------------------------------------------------------------------\n"
-            current_magasin = magasin
-            current_commande = None
+        if magasin != magasin_actuel:
+            if magasin_actuel is not None:
+                resultat += f"--------\nTotal {total_commande:.2f}\n"
+                resultat += "--------------------------------------------------------------------------------\n"
+                resultat += f"{nombre_factures} factures éditées\n"
+                resultat += f"{nombre_livres} livres vendus\n"
+                resultat += "********************************************************************************\n"
+            resultat += f"Edition des factures du magasin {magasin}\n"
+            resultat += "--------------------------------------------------------------------------------\n"
+            magasin_actuel = magasin
+            commande_actuelle = None
             total_commande = 0
-            facture_count = 0
-            livre_count = 0
+            nombre_factures = 0
+            nombre_livres = 0
         
-        if ligne['numcom'] != current_commande:
-            if current_commande is not None:
-                res += f"--------\nTotal {total_commande:.2f}\n"
-                res += "--------------------------------------------------------------------------------\n"
-            res += f"{ligne['prenomcli']} {ligne['nomcli']}\n{ligne['adressecli']}\n{ligne['codepostal']} {ligne['villecli']}\n"
-            res += f"commande n°{ligne['numcom']} du {ligne['datecom'].strftime('%d/%m/%Y')}\n"
-            res += "ISBN                Titre                                  qte    prix     total\n"
-            res += "--------------------------------------------------------------------------------\n"
-            current_commande = ligne['numcom']
+        if ligne['numcom'] != commande_actuelle:
+            if commande_actuelle is not None:
+                resultat += f"--------\nTotal {total_commande:.2f}\n"
+                resultat += "--------------------------------------------------------------------------------\n"
+            resultat += f"{ligne['prenomcli']} {ligne['nomcli']}\n{ligne['adressecli']}\n{ligne['codepostal']} {ligne['villecli']}\n"
+            resultat += f"commande n°{ligne['numcom']} du {ligne['datecom'].strftime('%d/%m/%Y')}\n"
+            resultat += "ISBN                Titre                                  qte    prix     total\n"
+            resultat += "--------------------------------------------------------------------------------\n"
+            commande_actuelle = ligne['numcom']
             total_commande = 0
-            facture_count += 1
+            nombre_factures += 1
         
-        res += f"{ligne['isbn']:<20} {ligne['titre'][:35]:<35}    {ligne['qte']:<5} {ligne['prixvente']:<8.2f} {ligne['total']:<8.2f}\n"
+        resultat += f"{ligne['isbn']:<20} {ligne['titre'][:35]:<35}    {ligne['qte']:<5} {ligne['prixvente']:<8.2f} {ligne['total']:<8.2f}\n"
         total_commande += ligne['total']
         total_livres += ligne['qte']
-        livre_count += ligne['qte']
-        chiffre_affaire_global += ligne['total']
+        nombre_livres += ligne['qte']
+        chiffre_affaire_total += ligne['total']
     
-    if current_commande is not None:
-        res += f"--------\nTotal {total_commande:.2f}\n"
-        res += "--------------------------------------------------------------------------------\n"
-        res += f"{facture_count} factures éditées\n"
-        res += f"{livre_count} livres vendus\n"
-        res += "********************************************************************************\n"
+    if commande_actuelle is not None:
+        resultat += f"--------\nTotal {total_commande:.2f}\n"
+        resultat += "--------------------------------------------------------------------------------\n"
+        resultat += f"{nombre_factures} factures éditées\n"
+        resultat += f"{nombre_livres} livres vendus\n"
+        resultat += "********************************************************************************\n"
     
-    res += f"Chiffre d’affaire global: {chiffre_affaire_global:.2f}\n"
-    res += f"Nombre livres vendus {total_livres}\n"
+    resultat += f"Chiffre d’affaire total: {chiffre_affaire_total:.2f}\n"
+    resultat += f"Nombre total de livres vendus: {total_livres}\n"
     
     curseur.close()
-    return res
+    return resultat
         
 
 
